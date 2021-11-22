@@ -1,0 +1,139 @@
+basePath: /
+definitions:
+  response.SuccessCreate:
+    properties:
+      data:
+        $ref: '#/definitions/todos.Todo'
+      messages:
+        example: success add new todos
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  response.SuccessDelete:
+    properties:
+      messages:
+        example: success delete todos
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  response.SuccessUpdate:
+    properties:
+      messages:
+        example: success delete todos
+        type: string
+      status:
+        example: success
+        type: string
+    type: object
+  todos.CreateTodo:
+    properties:
+      name:
+        example: Cuci Baju
+        type: string
+    type: object
+  todos.Todo:
+    properties:
+      complete:
+        example: false
+        type: boolean
+      id:
+        example: 1
+        type: integer
+      name:
+        example: Cuci Baju
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server celler server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Project 1 Kampus Merdeka X Hacktiv8 API Docs
+  version: "1.0"
+paths:
+  /todos:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Data Todos
+      parameters:
+      - description: ID Todo
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessDelete'
+      summary: Delete Data Todos
+    get:
+      consumes:
+      - application/json
+      description: Get All Todos
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/todos.Todo'
+            type: array
+      summary: Get All Data Todos
+    post:
+      consumes:
+      - application/json
+      description: Post New Data Todos
+      parameters:
+      - description: Todos
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/todos.CreateTodo'
+      - description: ID Todo
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessCreate'
+      summary: Post New Data Todos
+    put:
+      consumes:
+      - application/json
+      description: Edit Data Todos
+      parameters:
+      - description: Update
+        in: body
+        name: todo
+        required: true
+        schema:
+          $ref: '#/definitions/todos.CreateTodo'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.SuccessUpdate'
+      summary: Put Edit Data Todos
+swagger: "2.0"
